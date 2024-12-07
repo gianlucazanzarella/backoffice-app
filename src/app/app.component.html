@@ -1,1 +1,22 @@
-<router-outlet></router-outlet>
+<main class="h-full flex flex-col">
+  <mat-toolbar>
+    <button
+      mat-icon-button
+      (click)="toggleSidenav()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span>Backoffice App</span>
+
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+
+  <!-- <app-progress-bar></app-progress-bar> -->
+
+  <section class="flex-1">
+    <app-sidenav>
+      <router-outlet></router-outlet>
+    </app-sidenav>
+  </section>
+</main>

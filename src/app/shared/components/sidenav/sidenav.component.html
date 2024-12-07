@@ -1,0 +1,18 @@
+<mat-drawer-container
+  class="h-full"
+  autosize
+>
+  <mat-drawer
+    #drawer
+    mode="side"
+    [opened]="isSidenavOpened$ | async"
+  >
+    <div class="h-full bg-gray-100 p-4">
+      <p>Auto-resizing sidenav</p>
+    </div>
+  </mat-drawer>
+
+  <div class="flex flex-col h-full p-4">
+    <ng-content></ng-content>
+  </div>
+</mat-drawer-container>

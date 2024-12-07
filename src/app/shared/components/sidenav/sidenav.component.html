@@ -12,7 +12,7 @@
         <mat-list-item>
           <div
             [routerLink]="['/stores']"
-            [ngClass]="{ 'bg-gray-200': storesActive.isActive }"
+            [ngClass]="{ 'bg-gray-200 font-medium': storesActive.isActive }"
             #storesActive="routerLinkActive"
             routerLinkActive
             class="hover:bg-primary hover:text-white cursor-pointer px-4 py-2 rounded transition min-w-40"
@@ -24,7 +24,7 @@
         <mat-list-item>
           <div
             [routerLink]="['/stats']"
-            [ngClass]="{ 'bg-gray-200': statsActive.isActive }"
+            [ngClass]="{ 'bg-gray-200 font-medium': statsActive.isActive }"
             #statsActive="routerLinkActive"
             routerLinkActive
             class="hover:bg-primary hover:text-white cursor-pointer px-4 py-2 rounded transition min-w-40"

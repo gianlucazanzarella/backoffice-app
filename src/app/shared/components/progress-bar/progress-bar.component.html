@@ -1,0 +1,9 @@
+<div
+  *ngIf="isProgressVisible$ | async"
+  class="bg-white/40 fixed z-[9999] l-0 t-0 h-full w-full"
+>
+  <mat-progress-bar
+    mode="indeterminate"
+    color="primary"
+  ></mat-progress-bar>
+</div>

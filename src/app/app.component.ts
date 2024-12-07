@@ -7,6 +7,7 @@ import { RouterOutlet } from '@angular/router';
 import { SidenavComponent } from "./shared/components/sidenav/sidenav.component";
 import { Store } from '@ngrx/store';
 import { UiActions } from './root-state/ui/actions/ui.action';
+import { ProgressBarComponent } from './shared/components/progress-bar/progress-bar.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import { UiActions } from './root-state/ui/actions/ui.action';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    SidenavComponent
+    SidenavComponent,
+    ProgressBarComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

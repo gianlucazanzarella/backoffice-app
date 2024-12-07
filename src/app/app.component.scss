@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+
+main {
+  @include mat.toolbar-overrides((container-background-color: #2196F3,
+      container-text-color: white,
+    ));
+
+  .custom-btn {
+    @include mat.icon-button-overrides((icon-color: white));
+  }
+
+}

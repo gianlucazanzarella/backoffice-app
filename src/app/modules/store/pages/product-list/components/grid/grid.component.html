@@ -1,0 +1,78 @@
+<div class="p-4 flex-grow h-96 overflow-auto">
+  <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
+    <ng-container *ngFor="let product of products">
+      <mat-card
+        appearance="outlined"
+        class="min-h-96"
+      >
+        <mat-card-header>
+          <mat-card-title>
+            {{ product.data.title }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ product.data.category }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="flex flex-row">
+            <div class="flex-1">
+              <p class="text-xl font-bold my-3">
+                {{ product.data.price }} &euro;
+              </p>
+
+              <p class="mt-1 mb-1 max-h-48 overflow-auto">
+                {{ product.data.description | slice:0:(expandedProducts[product.id] ? undefined : 200) }}
+
+                <span *ngIf="!expandedProducts[product.id] && product.data.description.length > 200">
+                  ...
+                </span>
+
+                <span *ngIf="product.data.description.length > 200">
+                  <button
+                    mat-button
+                    class="p-0 text-blue-500 text-sm"
+                    (click)="toggleDescription(product.id)"
+                  >
+                    {{ expandedProducts[product.id] ? 'Show less' : 'Show more' }}
+                  </button>
+                </span>
+              </p>
+            </div>
+
+            <div class="flex-1 pl-4">
+              <p class="font-medium">
+                Employee: {{ product.data.employee }}
+              </p>
+
+              <hr class="my-2" />
+
+              <p class="font-medium">Reviews:
+                <span
+                  class="italic"
+                  *ngIf="!product.data.reviews.length"
+                >
+                  none
+                </span>
+              </p>
+
+              <div
+                class="max-h-48 overflow-auto"
+                *ngIf="product.data.reviews.length"
+              >
+                <ul>
+                  <li
+                    *ngFor="let review of product.data.reviews"
+                    class="mb-3"
+                  >
+                    "{{ review }}"
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </div>
+</div>

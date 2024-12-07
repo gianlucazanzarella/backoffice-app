@@ -7,8 +7,32 @@
     mode="side"
     [opened]="isSidenavOpened$ | async"
   >
-    <div class="h-full bg-gray-100 p-4">
-      <p>Auto-resizing sidenav</p>
+    <div class="h-full bg-gray-100">
+      <mat-list role="list">
+        <mat-list-item>
+          <div
+            [routerLink]="['/stores']"
+            [ngClass]="{ 'bg-gray-200': storesActive.isActive }"
+            #storesActive="routerLinkActive"
+            routerLinkActive
+            class="hover:bg-primary hover:text-white cursor-pointer px-4 py-2 rounded transition min-w-40"
+          >
+            Stores
+          </div>
+        </mat-list-item>
+
+        <mat-list-item>
+          <div
+            [routerLink]="['/stats']"
+            [ngClass]="{ 'bg-gray-200': statsActive.isActive }"
+            #statsActive="routerLinkActive"
+            routerLinkActive
+            class="hover:bg-primary hover:text-white cursor-pointer px-4 py-2 rounded transition min-w-40"
+          >
+            Statistics
+          </div>
+        </mat-list-item>
+      </mat-list>
     </div>
   </mat-drawer>
 

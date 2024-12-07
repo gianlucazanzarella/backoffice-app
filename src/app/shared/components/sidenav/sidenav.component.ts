@@ -4,12 +4,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UiSelector } from '../../../root-state/ui/selectors/ui.selector';
+import { MatListModule } from '@angular/material/list';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
   imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
     MatSidenavModule,
-    CommonModule
+    MatListModule
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'

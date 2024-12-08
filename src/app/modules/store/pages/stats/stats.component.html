@@ -1,3 +1,22 @@
-<p>
-  stats works!
-</p>
+<ng-container *ngIf="{
+  store: store$ | async,
+  storeLoading: storeLoading$ | async,
+  stats: stats$ | async,
+   statsLoading: statsLoading$ | async
+  } as data">
+  <ng-container *ngIf="!data.storeLoading && data.store && !data.statsLoading && data.stats else showSkeleton">
+    <div
+      class="text-3xl pt-7 pl-7 mb-10 font-medium text-center"
+      *ngIf="!data.storeLoading && data.store"
+    >
+      {{data.store.name}}
+    </div>
+
+
+
+  </ng-container>
+</ng-container>
+
+<ng-template #showSkeleton>
+
+</ng-template>

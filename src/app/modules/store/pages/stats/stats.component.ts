@@ -7,15 +7,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ChartData, ChartEvent, ChartType } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
 import { Observable } from 'rxjs';
+import { SkeletonComponent } from "../../../../shared/components/skeleton/skeleton.component";
 import { IStats } from '../../interfaces/stats.interface';
 import { IStoreData } from '../../interfaces/store.interface';
 import { StoresActions } from '../../state/actions/store.action';
 import { StoreSelector } from '../../state/selectors/store.selector';
 import { PolarChartComponent } from './components/polar-chart/polar-chart.component';
-import { SkeletonComponent } from "../../../../shared/components/skeleton/skeleton.component";
 
 @Component({
   selector: 'app-stats',

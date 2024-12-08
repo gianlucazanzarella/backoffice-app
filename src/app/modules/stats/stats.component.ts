@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-stats',
-  imports: [],
+  imports: [
+    RouterOutlet
+  ],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

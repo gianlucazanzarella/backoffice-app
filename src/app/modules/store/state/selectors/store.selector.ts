@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { storeFeatureKey, StoreState } from '../reducers/store.reducer';
-import { IStore, IStoreData } from '../../interfaces/store.interface';
+import { IStore, IStoreData } from '../../../../shared/interfaces/store.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IProduct } from '../../interfaces/product.interface';
 

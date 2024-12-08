@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { IStore, IStoreData } from '../../interfaces/store.interface';
+import { IStore, IStoreData } from '../../../../shared/interfaces/store.interface';
 import { IProduct } from '../../interfaces/product.interface';
 
 @Injectable()

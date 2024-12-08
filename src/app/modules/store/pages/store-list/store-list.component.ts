@@ -6,7 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { IStore } from '../../interfaces/store.interface';
+import { IStore } from '../../../../shared/interfaces/store.interface';
 import { StoresActions } from '../../state/actions/store.action';
 import { StoreSelector } from '../../state/selectors/store.selector';
 import { RouterLink } from '@angular/router';

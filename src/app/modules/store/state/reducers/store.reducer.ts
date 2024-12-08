@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { IStore, IStoreData } from '../../interfaces/store.interface';
+import { IStore, IStoreData } from '../../../../shared/interfaces/store.interface';
 import { StoresActions } from '../actions/store.action';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IProduct } from '../../interfaces/product.interface';

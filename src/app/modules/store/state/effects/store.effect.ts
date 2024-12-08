@@ -102,6 +102,18 @@ export class StoreEffect {
     )
   );
 
+  getStats$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoresActions.getStats),
+      switchMap((action) =>
+        this.storeService.getStats(action.storeId).pipe(
+          map((stats) => StoresActions.getStatsSuccess({ stats })),
+          catchError((error: HttpErrorResponse) => of(StoresActions.getStatsFailed({ error })))
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private storeService: StoreService,

@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
 import { StatsActions } from '../actions/stats.action';
-import { IStats } from '../interfaces/stats.interface';
-import { IStore } from '../../../../shared/interfaces/store.interface';
+import { IStats } from '../../../store/interfaces/stats.interface';
+import { IStore } from '../../../store/interfaces/store.interface';
 
 export const statsFeatureKey = 'stats';
 

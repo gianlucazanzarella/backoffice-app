@@ -7,7 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IStore } from '../../../../shared/interfaces/store.interface';
+import { IStore } from '../../interfaces/store.interface';
 import { StoresActions } from '../../state/actions/store.action';
 import { StoreSelector } from '../../state/selectors/store.selector';
 

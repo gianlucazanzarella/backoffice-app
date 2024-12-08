@@ -1,8 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { storeFeatureKey, StoreState } from '../reducers/store.reducer';
-import { IStore, IStoreData } from '../../../../shared/interfaces/store.interface';
+import { IStore, IStoreData } from '../../interfaces/store.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IProduct } from '../../interfaces/product.interface';
+import { IStats } from '../../interfaces/stats.interface';
 
 const getStoreState = createFeatureSelector<StoreState>(storeFeatureKey);
 
@@ -28,6 +29,10 @@ const deleteProductError = createSelector(getStoreState, (state: StoreState): Ht
 const createProductLoading = createSelector(getStoreState, (state: StoreState): boolean => state.createProduct.loading);
 const createProductError = createSelector(getStoreState, (state: StoreState): HttpErrorResponse | null => state.createProduct.error);
 
+const getStats = createSelector(getStoreState, (state: StoreState): IStats[] => state.stats.data);
+const getStatsLoading = createSelector(getStoreState, (state: StoreState): boolean => state.stats.loading);
+const getStatsError = createSelector(getStoreState, (state: StoreState): HttpErrorResponse | null => state.stats.error);
+
 export const StoreSelector = {
   getStores,
   getStoresLoading,
@@ -44,5 +49,8 @@ export const StoreSelector = {
   createProductError,
   getProduct,
   getProductLoading,
-  getProductError
+  getProductError,
+  getStats,
+  getStatsLoading,
+  getStatsError,
 };

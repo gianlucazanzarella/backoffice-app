@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { StatsSelector } from '../../state/selectors/stats.selector';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IStore } from '../../../../shared/interfaces/store.interface';
+import { IStore } from '../../../store/interfaces/store.interface';
 import { StatsActions } from '../../state/actions/stats.action';
 
 @Component({

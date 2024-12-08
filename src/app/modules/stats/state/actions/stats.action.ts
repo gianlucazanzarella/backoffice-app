@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-import { IStore } from '../../../../shared/interfaces/store.interface';
-import { IStats } from '../interfaces/stats.interface';
+import { IStore } from '../../../store/interfaces/store.interface';
+import { IStats } from '../../../store/interfaces/stats.interface';
 
 export enum StatsActionTypes {
   GET_STORES = '[Stats] get stores',

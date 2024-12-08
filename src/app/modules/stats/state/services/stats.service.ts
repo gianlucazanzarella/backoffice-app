@@ -1,8 +1,8 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { IStats } from '../interfaces/stats.interface';
-import { IStore } from '../../../../shared/interfaces/store.interface';
+import { IStats } from '../../../store/interfaces/stats.interface';
+import { IStore } from '../../../store/interfaces/store.interface';
 
 @Injectable()
 export class StatsService {

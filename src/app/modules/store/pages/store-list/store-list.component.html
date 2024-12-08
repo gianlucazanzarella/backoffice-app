@@ -67,6 +67,14 @@
             <mat-icon>shop_two</mat-icon>
             <span>View products</span>
           </button>
+
+          <button
+            mat-menu-item
+            [routerLink]="[element.id, 'stats']"
+          >
+            <mat-icon>bar_chart</mat-icon>
+            <span>View statistics</span>
+          </button>
         </mat-menu>
       </td>
     </ng-container>

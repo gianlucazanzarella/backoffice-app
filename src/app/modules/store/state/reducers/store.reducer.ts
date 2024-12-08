@@ -1,8 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { IStore, IStoreData } from '../../../../shared/interfaces/store.interface';
+import { IStore, IStoreData } from '../../interfaces/store.interface';
 import { StoresActions } from '../actions/store.action';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IProduct } from '../../interfaces/product.interface';
+import { IStats } from '../../interfaces/stats.interface';
 
 export const storeFeatureKey = 'store';
 
@@ -35,6 +36,11 @@ export interface StoreState {
     loading: boolean;
     error: HttpErrorResponse | null;
   };
+  stats: {
+    data: IStats[];
+    loading: boolean;
+    error: HttpErrorResponse | null;
+  };
 }
 
 export const initialState: StoreState = {
@@ -63,6 +69,11 @@ export const initialState: StoreState = {
     error: null,
   },
   createProduct: {
+    loading: false,
+    error: null,
+  },
+  stats: {
+    data: [],
     loading: false,
     error: null,
   }
@@ -234,6 +245,35 @@ export const StoreReducer = createReducer(
     ...state,
     createProduct: {
       ...state.createProduct,
+      loading: false,
+      error: action.error
+    }
+  })),
+
+  // Get Stats list
+  on(StoresActions.getStats, state => ({
+    ...state,
+    stats: {
+      ...state.stats,
+      data: [],
+      loading: true,
+      error: null
+    }
+  })),
+  on(StoresActions.getStatsSuccess, (state, action) => ({
+    ...state,
+    stats: {
+      ...state.stats,
+      data: action.stats,
+      loading: false,
+      error: null
+    }
+  })),
+  on(StoresActions.getStatsFailed, (state, action) => ({
+    ...state,
+    stats: {
+      ...state.stats,
+      data: [],
       loading: false,
       error: action.error
     }

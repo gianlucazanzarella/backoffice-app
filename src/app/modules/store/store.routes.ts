@@ -14,5 +14,9 @@ export const storeRoutes: Routes = [
         loadComponent: () => import('./pages/product-create/product-create.component').then(c => c.ProductCreateComponent),
       }
     ]
+  },
+  {
+    path: ':storeId/stats',
+    loadComponent: () => import('./pages/stats/stats.component').then(c => c.StatsComponent),
   }
 ];

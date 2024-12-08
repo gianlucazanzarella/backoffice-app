@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { IStore, IStoreData } from '../../../../shared/interfaces/store.interface';
+import { IStore, IStoreData } from '../../interfaces/store.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IProduct } from '../../interfaces/product.interface';
+import { IStats } from '../../interfaces/stats.interface';
 
 export enum StoreActionTypes {
   GET_STORES = '[Store] get stores',
@@ -27,6 +28,10 @@ export enum StoreActionTypes {
   CREATE_PRODUCT = '[Store] create product',
   CREATE_PRODUCT_SUCCESS = '[Store] create product success',
   CREATE_PRODUCT_FAILED = '[Store] create product failed',
+
+  GET_STATS = '[Store] get stats',
+  GET_STATS_SUCCESS = '[Store] get stats success',
+  GET_STATS_FAILED = '[Store] get stats failed',
 }
 
 const getStores = createAction(StoreActionTypes.GET_STORES);
@@ -53,6 +58,10 @@ const createProduct = createAction(StoreActionTypes.CREATE_PRODUCT, props<{ stor
 const createProductSuccess = createAction(StoreActionTypes.CREATE_PRODUCT_SUCCESS, props<{ storeId: string; }>());
 const createProductFailed = createAction(StoreActionTypes.CREATE_PRODUCT_FAILED, props<{ error: HttpErrorResponse; }>());
 
+const getStats = createAction(StoreActionTypes.GET_STATS, props<{ storeId: string; }>());
+const getStatsSuccess = createAction(StoreActionTypes.GET_STATS_SUCCESS, props<{ stats: IStats[]; }>());
+const getStatsFailed = createAction(StoreActionTypes.GET_STATS_FAILED, props<{ error: HttpErrorResponse; }>());
+
 export const StoresActions = {
   getStores,
   getStoresSuccess,
@@ -71,5 +80,8 @@ export const StoresActions = {
   deleteProductFailed,
   createProduct,
   createProductSuccess,
-  createProductFailed
+  createProductFailed,
+  getStats,
+  getStatsSuccess,
+  getStatsFailed
 };

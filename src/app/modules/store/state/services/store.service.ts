@@ -1,8 +1,9 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { IStore, IStoreData } from '../../../../shared/interfaces/store.interface';
+import { IStore, IStoreData } from '../../interfaces/store.interface';
 import { IProduct } from '../../interfaces/product.interface';
+import { IStats } from '../../interfaces/stats.interface';
 
 @Injectable()
 export class StoreService {
@@ -64,6 +65,16 @@ export class StoreService {
             throw new Error("Error during product creation");
           }
         })
+      );
+  }
+
+  getStats(storeId: string): Observable<IStats[]> {
+    return this.httpClientService
+      .get<IStats[]>(`stores/${ storeId }/stats/categories`, {
+        observe: 'response',
+      })
+      .pipe(
+        map((res: HttpResponse<IStats[]>) => res.body || [])
       );
   }
 

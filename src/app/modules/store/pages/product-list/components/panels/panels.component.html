@@ -7,7 +7,9 @@
             {{ product.data.title }}
           </mat-card-title>
           <mat-card-subtitle>
-            {{ product.data.category }}
+            <span class="italic text-gray-400">
+              {{ product.data.category }}
+            </span>
           </mat-card-subtitle>
         </mat-card-header>
 
@@ -75,10 +77,10 @@
           class="!mt-auto"
         >
           <button
-            mat-button
+            mat-icon-button
             (click)="onDelete(product)"
           >
-            Delete
+            <mat-icon>delete</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>

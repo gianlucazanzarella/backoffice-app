@@ -15,8 +15,9 @@
             [ngClass]="{ 'bg-gray-200 font-medium': storesActive.isActive }"
             #storesActive="routerLinkActive"
             routerLinkActive
-            class="hover:bg-primary hover:text-white cursor-pointer px-4 py-2 rounded transition min-w-40"
+            class="hover:bg-primary hover:text-white cursor-pointer px-4 py-2 rounded transition min-w-40 flex flex-row items-center"
           >
+            <mat-icon class="mb-1 mr-3">home</mat-icon>
             Stores
           </div>
         </mat-list-item>

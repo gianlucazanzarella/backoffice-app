@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { StoresActions } from '../actions/store.action';
 import { StoreService } from '../services/store.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { UiActions } from '../../../../root-state/ui/actions/ui.action';
 import { StoreSelector } from '../selectors/store.selector';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class StoreEffect {
@@ -32,6 +33,15 @@ export class StoreEffect {
         )
       )
     )
+  );
+
+  getStoreFailed$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoresActions.getStoreFailed),
+      tap(() => {
+        this.router.navigate(['error']);
+      }),
+    ), { dispatch: false }
   );
 
   getProducts$ = createEffect(() =>
@@ -117,6 +127,7 @@ export class StoreEffect {
   constructor(
     private actions$: Actions,
     private storeService: StoreService,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) { }
 }

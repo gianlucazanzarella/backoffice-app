@@ -2,10 +2,10 @@
 
 <mat-dialog-content>
   <form
-    class="flex flex-col p-8 max-h-[600px]"
+    class="flex flex-col p-8 max-h-[400px]"
     [formGroup]="productForm"
   >
-    <mat-form-field>
+    <mat-form-field class="mb-2">
       <mat-label>
         Title
       </mat-label>
@@ -22,15 +22,14 @@
       }
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>
-        Category
-      </mat-label>
-
-      <input
-        matInput
-        formControlName="category"
-      >
+    <mat-form-field class="mb-2">
+      <mat-label>Favorite food</mat-label>
+      <mat-select formControlName="category">
+        <mat-option value="Pastries">Pastries</mat-option>
+        <mat-option value="Cakes ">Cakes</mat-option>
+        <mat-option value="Breads ">Breads</mat-option>
+        <mat-option value="Cookies ">Cookies</mat-option>
+      </mat-select>
 
       @if (productForm.get('category')?.hasError('required')) {
       <mat-error>
@@ -39,7 +38,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="mb-2">
       <mat-label>
         Price
       </mat-label>
@@ -62,7 +61,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="mb-2">
       <mat-label>Employee</mat-label>
 
       <input
@@ -76,7 +75,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="mb-2">
       <mat-label>
         Description
       </mat-label>
@@ -90,9 +89,10 @@
       <mat-error>
         Description is required
       </mat-error>
-      } </mat-form-field>
+      }
+    </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="mb-2">
       <mat-label>
         Reviews
       </mat-label>

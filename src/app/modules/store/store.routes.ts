@@ -8,12 +8,6 @@ export const storeRoutes: Routes = [
   {
     path: ':storeId/products',
     loadComponent: () => import('./pages/product-list/product-list.component').then(c => c.ProductListComponent),
-    children: [
-      {
-        path: 'create',
-        loadComponent: () => import('./pages/product-create/product-create.component').then(c => c.ProductCreateComponent),
-      }
-    ]
   },
   {
     path: ':storeId/stats',

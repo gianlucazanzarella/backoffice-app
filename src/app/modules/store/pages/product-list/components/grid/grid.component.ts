@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { IProduct } from '../../../../interfaces/product.interface';
 
 @Component({
@@ -9,7 +10,8 @@ import { IProduct } from '../../../../interfaces/product.interface';
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './grid.component.html',
   styleUrl: './grid.component.scss',

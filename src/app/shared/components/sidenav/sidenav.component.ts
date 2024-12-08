@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UiSelector } from '../../../root-state/ui/selectors/ui.selector';
-import { MatListModule } from '@angular/material/list';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -14,7 +15,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     RouterLink,
     RouterLinkActive,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatIconModule
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',

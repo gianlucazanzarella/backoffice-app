@@ -9,7 +9,7 @@ import { storeRoutes } from './modules/store/store.routes';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'stats',
+    redirectTo: 'stores',
     pathMatch: 'full'
   },
   {

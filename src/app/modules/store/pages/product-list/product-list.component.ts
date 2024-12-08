@@ -17,6 +17,7 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
 import { GridComponent } from "./components/grid/grid.component";
 import { PanelsComponent } from "./components/panels/panels.component";
 import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
+import { SkeletonComponent } from "../../../../shared/components/skeleton/skeleton.component";
 
 @Component({
   selector: 'app-product-list',
@@ -28,7 +29,8 @@ import { CreateDialogComponent } from './components/create-dialog/create-dialog.
     MatIconModule,
     ReactiveFormsModule,
     PanelsComponent,
-    GridComponent
+    GridComponent,
+    SkeletonComponent
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',

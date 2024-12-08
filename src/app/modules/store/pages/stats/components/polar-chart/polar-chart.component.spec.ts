@@ -1,18 +1,18 @@
 import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
-import { ChartsComponent } from './charts.component';
+import { PolarChartComponent } from './polar-chart.component';
 
-describe('ChartsComponent', () => {
-  let component: ChartsComponent;
-  let fixture: ComponentFixture<ChartsComponent>;
+describe('PolarChartComponent', () => {
+  let component: PolarChartComponent;
+  let fixture: ComponentFixture<PolarChartComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ChartsComponent],
+      imports: [PolarChartComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChartsComponent);
+    fixture = TestBed.createComponent(PolarChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

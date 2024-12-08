@@ -1,4 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { StatsSelector } from '../../state/selectors/stats.selector';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { IStore } from '../../../../shared/interfaces/store.interface';
+import { StatsActions } from '../../state/actions/stats.action';
 
 @Component({
   selector: 'app-charts',
@@ -8,9 +13,14 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class ChartsComponent implements OnInit {
 
-  constructor() { }
+  stores$: Observable<IStore[]> = this.store.select(StatsSelector.getStores);
+
+  constructor(
+    private store: Store
+  ) { }
 
   ngOnInit() {
+    this.store.dispatch(StatsActions.getStores());
   }
 
 }

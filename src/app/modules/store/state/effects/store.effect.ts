@@ -46,6 +46,25 @@ export class StoreEffect {
     )
   );
 
+  deleteProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoresActions.deleteProduct),
+      switchMap((action) =>
+        this.storeService.deleteProduct(action.storeId, action.productId).pipe(
+          map(() => StoresActions.deleteProductSuccess({ storeId: action.storeId })),
+          catchError((error: HttpErrorResponse) => of(StoresActions.deleteProductFailed({ error })))
+        )
+      )
+    )
+  );
+
+  deleteProductSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoresActions.deleteProductSuccess),
+      map((action) => StoresActions.getProducts({ storeId: action.storeId }))
+    )
+  );
+
   showProgressOnStoresLoading$ = createEffect(() =>
     this.store.select(StoreSelector.getStoresLoading).pipe(
       map((isLoading) => UiActions.showProgress({ isVisible: isLoading }))

@@ -4,37 +4,68 @@
   products: products$ | async,
    productsLoading: productsLoading$ | async
   } as data">
+  <ng-container *ngIf="!data.storeLoading && data.store && !data.productsLoading && data.products else showSkeleton">
+    <div
+      class="text-3xl pt-7 pl-7 mb-10 font-medium text-center"
+      *ngIf="!data.storeLoading && data.store"
+    >
+      {{data.store.name}}
+    </div>
 
-  <div
-    class="text-3xl pt-7 pl-7 mb-10 font-medium text-center"
-    *ngIf="!data.storeLoading && data.store"
-  >
-    {{data.store.name}}
-  </div>
+    <div class="flex flex-row justify-between items-start pr-10 mb-3">
+      <mat-button-toggle-group [formControl]="viewMode">
+        <mat-button-toggle value="grid">
+          <mat-icon>
+            grid_on
+          </mat-icon>
+        </mat-button-toggle>
 
-  <div class="flex flex-row justify-end pr-10">
-    <mat-button-toggle-group [formControl]="viewMode">
-      <mat-button-toggle value="grid">
-        <mat-icon>grid_on
-        </mat-icon>
-      </mat-button-toggle>
+        <mat-button-toggle value="panels">
+          <mat-icon>
+            view_headline
+          </mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
 
-      <mat-button-toggle value="panels">
-        <mat-icon>
-          view_headline
-        </mat-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
+      <button
+        mat-fab
+        extended
+        (click)="openCreateDialog()"
+      >
+        <mat-icon>add</mat-icon>
+        Create new product
+      </button>
+    </div>
 
-  <ng-container *ngIf="!data.productsLoading && data.products">
-    <app-grid
-      *ngIf="viewMode.value === 'grid'"
-      [products]="data.products"
-    ></app-grid>
-    <app-panels
-      *ngIf="viewMode.value === 'panels'"
-      [products]="data.products"
-    ></app-panels>
+    <ng-container *ngIf="!data.productsLoading && data.products">
+      <app-grid
+        *ngIf="viewMode.value === 'grid'"
+        [products]="data.products"
+        (deleteProduct)="deleteProduct($event)"
+      ></app-grid>
+      <app-panels
+        *ngIf="viewMode.value === 'panels'"
+        [products]="data.products"
+        (deleteProduct)="deleteProduct($event)"
+      ></app-panels>
+    </ng-container>
   </ng-container>
 </ng-container>
+
+<ng-template #showSkeleton>
+  <div class="flex flex-row justify-center">
+    <div class=" pt-7 pl-7 mb-10 h-10 w-44 bg-gray-200 rounded-full">
+    </div>
+  </div>
+
+  <div class="flex flex-row justify-between items-start pr-10 mb-6">
+    <div class="h-10 w-40 bg-gray-200 rounded-full">
+    </div>
+
+    <div class="h-10 w-40 bg-gray-200 rounded-full">
+    </div>
+  </div>
+
+  <div class="h-20 bg-gray-200 rounded-full mb-3"></div>
+  <div class="h-20 bg-gray-200 rounded-full"></div>
+</ng-template>

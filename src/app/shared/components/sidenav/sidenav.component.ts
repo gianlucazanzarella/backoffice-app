@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -17,7 +17,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     MatListModule
   ],
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.scss'
+  styleUrl: './sidenav.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidenavComponent {
 

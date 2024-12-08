@@ -15,6 +15,10 @@ export enum StoreActionTypes {
   GET_PRODUCTS = '[Store] get products',
   GET_PRODUCTS_SUCCESS = '[Store] get products success',
   GET_PRODUCTS_FAILED = '[Store] get products failed',
+
+  DELETE_PRODUCT = '[Store] delete product',
+  DELETE_PRODUCT_SUCCESS = '[Store] delete product success',
+  DELETE_PRODUCT_FAILED = '[Store] delete product failed',
 }
 
 const getStores = createAction(StoreActionTypes.GET_STORES);
@@ -29,6 +33,10 @@ const getProducts = createAction(StoreActionTypes.GET_PRODUCTS, props<{ storeId:
 const getProductsSuccess = createAction(StoreActionTypes.GET_PRODUCTS_SUCCESS, props<{ products: IProduct[]; }>());
 const getProductsFailed = createAction(StoreActionTypes.GET_PRODUCTS_FAILED, props<{ error: HttpErrorResponse; }>());
 
+const deleteProduct = createAction(StoreActionTypes.DELETE_PRODUCT, props<{ storeId: string; productId: string; }>());
+const deleteProductSuccess = createAction(StoreActionTypes.DELETE_PRODUCT_SUCCESS, props<{ storeId: string; }>());
+const deleteProductFailed = createAction(StoreActionTypes.DELETE_PRODUCT_FAILED, props<{ error: HttpErrorResponse; }>());
+
 export const StoresActions = {
   getStores,
   getStoresSuccess,
@@ -39,4 +47,7 @@ export const StoresActions = {
   getProducts,
   getProductsSuccess,
   getProductsFailed,
+  deleteProduct,
+  deleteProductSuccess,
+  deleteProductFailed
 };

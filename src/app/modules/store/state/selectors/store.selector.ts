@@ -18,6 +18,9 @@ const getProducts = createSelector(getStoreState, (state: StoreState): IProduct[
 const getProductsLoading = createSelector(getStoreState, (state: StoreState): boolean => state.products.loading);
 const getProductsError = createSelector(getStoreState, (state: StoreState): HttpErrorResponse | null => state.products.error);
 
+const deleteProductLoading = createSelector(getStoreState, (state: StoreState): boolean => state.deleteProduct.loading);
+const deleteProductError = createSelector(getStoreState, (state: StoreState): HttpErrorResponse | null => state.deleteProduct.error);
+
 export const StoreSelector = {
   getStores,
   getStoresLoading,
@@ -27,5 +30,7 @@ export const StoreSelector = {
   getStoreError,
   getProducts,
   getProductsLoading,
-  getProductsError
+  getProductsError,
+  deleteProductLoading,
+  deleteProductError
 };

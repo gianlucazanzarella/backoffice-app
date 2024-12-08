@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { IProduct } from '../../../../interfaces/product.interface';
@@ -12,9 +12,12 @@ import { IProduct } from '../../../../interfaces/product.interface';
     MatButtonModule
   ],
   templateUrl: './panels.component.html',
-  styleUrl: './panels.component.scss'
+  styleUrl: './panels.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelsComponent implements OnInit {
+
+  @Output() deleteProduct: EventEmitter<IProduct> = new EventEmitter<IProduct>();
 
   @Input() products: IProduct[];
 
@@ -29,4 +32,7 @@ export class PanelsComponent implements OnInit {
     this.expandedProducts[productId] = !this.expandedProducts[productId];
   }
 
+  onDelete(product: IProduct): void {
+    this.deleteProduct.emit(product);
+  }
 }

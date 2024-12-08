@@ -1,19 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { IProduct } from '../../interfaces/product.interface';
-import { IStore, IStoreData } from '../../interfaces/store.interface';
+import { IStoreData } from '../../interfaces/store.interface';
 import { StoresActions } from '../../state/actions/store.action';
 import { StoreSelector } from '../../state/selectors/store.selector';
-import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { PanelsComponent } from "./components/panels/panels.component";
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { GridComponent } from "./components/grid/grid.component";
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatIconModule } from '@angular/material/icon';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { PanelsComponent } from "./components/panels/panels.component";
+import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
 
 @Component({
   selector: 'app-product-list',
@@ -28,7 +31,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     GridComponent
   ],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+  styleUrl: './product-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductListComponent implements OnInit, OnDestroy {
 
@@ -40,6 +44,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   subscriptions: Subscription = new Subscription();
   storeId: string | null = this.route.snapshot.paramMap.get('storeId');
   viewMode: FormControl<string | null> = new FormControl<string>('panels');
+  deleteDialogRef: MatDialogRef<DeleteDialogComponent, { title: string; }>;
+  createDialogRef: MatDialogRef<CreateDialogComponent, any>;
+
+  readonly dialog: MatDialog = inject(MatDialog);
 
   constructor(
     private store: Store,
@@ -55,5 +63,27 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  deleteProduct(product: IProduct): void {
+
+    this.deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '250px',
+      data: {
+        title: product.data.title
+      }
+    });
+
+    this.deleteDialogRef.afterClosed().subscribe((confirm) => {
+      if (confirm) {
+        this.store.dispatch(StoresActions.deleteProduct({ storeId: this.storeId!, productId: product.id }));
+      }
+    });
+  }
+
+  openCreateDialog(): void {
+    this.createDialogRef = this.dialog.open(CreateDialogComponent, {
+      data: {}
+    });
   }
 }

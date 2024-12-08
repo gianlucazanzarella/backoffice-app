@@ -72,6 +72,18 @@
             </div>
           </div>
         </mat-card-content>
+
+        <mat-card-actions
+          align="end"
+          class="!mt-auto"
+        >
+          <button
+            mat-button
+            (click)="onDelete(product)"
+          >
+            Delete
+          </button>
+        </mat-card-actions>
       </mat-card>
     </ng-container>
   </div>

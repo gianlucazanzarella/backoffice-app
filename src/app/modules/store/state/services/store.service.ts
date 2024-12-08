@@ -37,5 +37,12 @@ export class StoreService {
       );
   }
 
+  deleteProduct(storeId: string, productId: string): Observable<HttpResponse<null>> {
+    return this.httpClientService
+      .delete<any>(`stores/${ storeId }/products/${ productId }`, {
+        observe: 'response',
+      });
+  }
+
   constructor(private httpClientService: HttpClient) { }
 }

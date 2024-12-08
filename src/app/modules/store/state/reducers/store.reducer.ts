@@ -22,6 +22,10 @@ export interface StoreState {
     loading: boolean;
     error: HttpErrorResponse | null;
   };
+  deleteProduct: {
+    loading: boolean;
+    error: HttpErrorResponse | null;
+  };
 }
 
 export const initialState: StoreState = {
@@ -37,6 +41,10 @@ export const initialState: StoreState = {
   },
   products: {
     data: [],
+    loading: false,
+    error: null,
+  },
+  deleteProduct: {
     loading: false,
     error: null,
   }
@@ -121,6 +129,30 @@ export const StoreReducer = createReducer(
     products: {
       ...state.products,
       data: [],
+      loading: false,
+      error: action.error
+    }
+  })),
+  on(StoresActions.deleteProduct, state => ({
+    ...state,
+    deleteProduct: {
+      ...state.deleteProduct,
+      loading: true,
+      error: null
+    }
+  })),
+  on(StoresActions.deleteProductSuccess, (state, action) => ({
+    ...state,
+    deleteProduct: {
+      ...state.deleteProduct,
+      loading: false,
+      error: null
+    }
+  })),
+  on(StoresActions.deleteProductFailed, (state, action) => ({
+    ...state,
+    deleteProduct: {
+      ...state.deleteProduct,
       loading: false,
       error: action.error
     }

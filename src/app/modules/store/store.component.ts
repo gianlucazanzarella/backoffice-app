@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,7 +7,8 @@ import { RouterOutlet } from '@angular/router';
     RouterOutlet
   ],
   templateUrl: './store.component.html',
-  styleUrl: './store.component.scss'
+  styleUrl: './store.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StoreComponent implements OnInit {
 

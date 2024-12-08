@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { IProduct } from '../../../../interfaces/product.interface';
@@ -12,9 +12,12 @@ import { IProduct } from '../../../../interfaces/product.interface';
     MatButtonModule
   ],
   templateUrl: './grid.component.html',
-  styleUrl: './grid.component.scss'
+  styleUrl: './grid.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridComponent implements OnInit {
+
+  @Output() deleteProduct: EventEmitter<IProduct> = new EventEmitter<IProduct>();
 
   @Input() products: IProduct[];
 
@@ -27,6 +30,10 @@ export class GridComponent implements OnInit {
 
   toggleDescription(productId: string): void {
     this.expandedProducts[productId] = !this.expandedProducts[productId];
+  }
+
+  onDelete(product: IProduct): void {
+    this.deleteProduct.emit(product);
   }
 
 }

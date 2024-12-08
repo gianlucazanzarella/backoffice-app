@@ -18,8 +18,15 @@ const getProducts = createSelector(getStoreState, (state: StoreState): IProduct[
 const getProductsLoading = createSelector(getStoreState, (state: StoreState): boolean => state.products.loading);
 const getProductsError = createSelector(getStoreState, (state: StoreState): HttpErrorResponse | null => state.products.error);
 
+const getProduct = createSelector(getStoreState, (state: StoreState): IProduct | null => state.product.data);
+const getProductLoading = createSelector(getStoreState, (state: StoreState): boolean => state.product.loading);
+const getProductError = createSelector(getStoreState, (state: StoreState): HttpErrorResponse | null => state.product.error);
+
 const deleteProductLoading = createSelector(getStoreState, (state: StoreState): boolean => state.deleteProduct.loading);
 const deleteProductError = createSelector(getStoreState, (state: StoreState): HttpErrorResponse | null => state.deleteProduct.error);
+
+const createProductLoading = createSelector(getStoreState, (state: StoreState): boolean => state.createProduct.loading);
+const createProductError = createSelector(getStoreState, (state: StoreState): HttpErrorResponse | null => state.createProduct.error);
 
 export const StoreSelector = {
   getStores,
@@ -32,5 +39,10 @@ export const StoreSelector = {
   getProductsLoading,
   getProductsError,
   deleteProductLoading,
-  deleteProductError
+  deleteProductError,
+  createProductLoading,
+  createProductError,
+  getProduct,
+  getProductLoading,
+  getProductError
 };

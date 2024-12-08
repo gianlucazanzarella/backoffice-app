@@ -76,14 +76,20 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     this.deleteDialogRef.afterClosed().subscribe((confirm) => {
       if (confirm) {
-        this.store.dispatch(StoresActions.deleteProduct({ storeId: this.storeId!, productId: product.id }));
+        this.store.dispatch(StoresActions.deleteProduct({ storeId: this.storeId!, productId: product.id! }));
       }
     });
   }
 
   openCreateDialog(): void {
     this.createDialogRef = this.dialog.open(CreateDialogComponent, {
-      data: {}
+      minWidth: '500px',
+    });
+
+    this.createDialogRef.afterClosed().subscribe((product: IProduct) => {
+      if (product) {
+        this.store.dispatch(StoresActions.createProduct({ storeId: this.storeId!, product }));
+      }
     });
   }
 }

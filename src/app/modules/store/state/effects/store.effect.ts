@@ -46,6 +46,18 @@ export class StoreEffect {
     )
   );
 
+  getProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoresActions.getProduct),
+      switchMap((action) =>
+        this.storeService.getProduct(action.storeId, action.productId).pipe(
+          map((product) => StoresActions.getProductSuccess({ product })),
+          catchError((error: HttpErrorResponse) => of(StoresActions.getProductFailed({ error })))
+        )
+      )
+    )
+  );
+
   deleteProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoresActions.deleteProduct),
@@ -61,6 +73,25 @@ export class StoreEffect {
   deleteProductSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoresActions.deleteProductSuccess),
+      map((action) => StoresActions.getProducts({ storeId: action.storeId }))
+    )
+  );
+
+  createProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoresActions.createProduct),
+      switchMap((action) =>
+        this.storeService.createProduct(action.storeId, action.product).pipe(
+          map(() => StoresActions.createProductSuccess({ storeId: action.storeId })),
+          catchError((error: HttpErrorResponse) => of(StoresActions.createProductFailed({ error })))
+        )
+      )
+    )
+  );
+
+  createProductSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoresActions.createProductSuccess),
       map((action) => StoresActions.getProducts({ storeId: action.storeId }))
     )
   );

@@ -1,3 +1,129 @@
-<p>
-  create-dialog works!
-</p>
+<h2 mat-dialog-title>Create a new product</h2>
+
+<mat-dialog-content>
+  <form
+    class="flex flex-col p-8 max-h-[600px]"
+    [formGroup]="productForm"
+  >
+    <mat-form-field>
+      <mat-label>
+        Title
+      </mat-label>
+
+      <input
+        formControlName="title"
+        matInput
+      >
+
+      @if (productForm.get('title')?.hasError('required')) {
+      <mat-error>
+        Title is required
+      </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        Category
+      </mat-label>
+
+      <input
+        matInput
+        formControlName="category"
+      >
+
+      @if (productForm.get('category')?.hasError('required')) {
+      <mat-error>
+        Category is required
+      </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        Price
+      </mat-label>
+
+      <input
+        matInput
+        formControlName="price"
+      >
+
+      @if (productForm.get('price')?.hasError('required')) {
+      <mat-error>
+        Price is required
+      </mat-error>
+      }
+
+      @if (productForm.get('price')?.hasError('pattern')) {
+      <mat-error>
+        Only numeric values are allowed
+      </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Employee</mat-label>
+
+      <input
+        matInput
+        formControlName="employee"
+      >
+      @if (productForm.get('employee')?.hasError('required')) {
+      <mat-error>
+        Employee is required
+      </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        Description
+      </mat-label>
+
+      <textarea
+        matInput
+        formControlName="description"
+      ></textarea>
+
+      @if (productForm.get('description')?.hasError('required')) {
+      <mat-error>
+        Description is required
+      </mat-error>
+      } </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        Reviews
+      </mat-label>
+
+      <textarea
+        matInput
+        formControlName="reviews"
+        placeholder="Add a review..."
+      ></textarea>
+
+      @if (productForm.get('reviews')?.hasError('required')) {
+      <mat-error>
+        Reviews is required
+      </mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    mat-button
+    (click)="close()"
+  >
+    Close
+  </button>
+  <button
+    mat-button
+    (click)="create()"
+    [disabled]="productForm.invalid"
+  >
+    Create
+  </button>
+</mat-dialog-actions>

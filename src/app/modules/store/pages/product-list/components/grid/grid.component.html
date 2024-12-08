@@ -22,9 +22,9 @@
               </p>
 
               <p class="mt-1 mb-1 max-h-48 overflow-auto">
-                {{ product.data.description | slice:0:(expandedProducts[product.id] ? undefined : 200) }}
+                {{ product.data.description | slice:0:(expandedProducts[product.id!] ? undefined : 200) }}
 
-                <span *ngIf="!expandedProducts[product.id] && product.data.description.length > 200">
+                <span *ngIf="!expandedProducts[product.id!] && product.data.description.length > 200">
                   ...
                 </span>
 
@@ -32,9 +32,9 @@
                   <button
                     mat-button
                     class="p-0 text-blue-500 text-sm"
-                    (click)="toggleDescription(product.id)"
+                    (click)="toggleDescription(product.id!)"
                   >
-                    {{ expandedProducts[product.id] ? 'Show less' : 'Show more' }}
+                    {{ expandedProducts[product.id!] ? 'Show less' : 'Show more' }}
                   </button>
                 </span>
               </p>

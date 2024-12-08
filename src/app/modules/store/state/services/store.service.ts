@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { IStore, IStoreData } from '../../interfaces/store.interface';
 import { IProduct } from '../../interfaces/product.interface';
 
@@ -37,11 +37,34 @@ export class StoreService {
       );
   }
 
-  deleteProduct(storeId: string, productId: string): Observable<HttpResponse<null>> {
+  getProduct(storeId: string, productId: string): Observable<IProduct | null> {
     return this.httpClientService
-      .delete<any>(`stores/${ storeId }/products/${ productId }`, {
+      .get<IProduct | null>(`stores/${ storeId }/products/${ productId }`, {
         observe: 'response',
-      });
+      })
+      .pipe(
+        map((res: HttpResponse<IProduct | null>) => res.body)
+      );
+  }
+
+  deleteProduct(storeId: string, productId: string): Observable<void> {
+    return this.httpClientService
+      .delete<void>(`stores/${ storeId }/products/${ productId }`);
+  }
+
+  createProduct(storeId: string, product: IProduct): Observable<void> {
+    return this.httpClientService
+      .post<void>(`stores/${ storeId }/products`,
+        product
+      ).pipe(
+        catchError((error) => {
+          if (error.status === 200) {
+            return of(error.error.text);
+          } else {
+            throw new Error("Error during product creation");
+          }
+        })
+      );
   }
 
   constructor(private httpClientService: HttpClient) { }

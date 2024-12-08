@@ -10,6 +10,11 @@ html {
       density: 0));
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d5d7da #f1f1f1;
+}
+
 html,
 body {
   height: 100%;

@@ -22,7 +22,16 @@ export interface StoreState {
     loading: boolean;
     error: HttpErrorResponse | null;
   };
+  product: {
+    data: IProduct | null;
+    loading: boolean;
+    error: HttpErrorResponse | null;
+  };
   deleteProduct: {
+    loading: boolean;
+    error: HttpErrorResponse | null;
+  };
+  createProduct: {
     loading: boolean;
     error: HttpErrorResponse | null;
   };
@@ -44,7 +53,16 @@ export const initialState: StoreState = {
     loading: false,
     error: null,
   },
+  product: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   deleteProduct: {
+    loading: false,
+    error: null,
+  },
+  createProduct: {
     loading: false,
     error: null,
   }
@@ -52,6 +70,8 @@ export const initialState: StoreState = {
 
 export const StoreReducer = createReducer(
   initialState,
+
+  // Get Stores list
   on(StoresActions.getStores, state => ({
     ...state,
     stores: {
@@ -79,6 +99,8 @@ export const StoreReducer = createReducer(
       error: action.error
     }
   })),
+
+  // Get store
   on(StoresActions.getStore, state => ({
     ...state,
     store: {
@@ -106,6 +128,8 @@ export const StoreReducer = createReducer(
       error: action.error
     }
   })),
+
+  // Get products list
   on(StoresActions.getProducts, state => ({
     ...state,
     products: {
@@ -133,6 +157,37 @@ export const StoreReducer = createReducer(
       error: action.error
     }
   })),
+
+  // Get product
+  on(StoresActions.getProduct, state => ({
+    ...state,
+    product: {
+      ...state.product,
+      data: null,
+      loading: true,
+      error: null
+    }
+  })),
+  on(StoresActions.getProductSuccess, (state, action) => ({
+    ...state,
+    product: {
+      ...state.product,
+      data: action.product,
+      loading: false,
+      error: null
+    }
+  })),
+  on(StoresActions.getProductFailed, (state, action) => ({
+    ...state,
+    product: {
+      ...state.product,
+      data: null,
+      loading: false,
+      error: action.error
+    }
+  })),
+
+  // Delete product
   on(StoresActions.deleteProduct, state => ({
     ...state,
     deleteProduct: {
@@ -153,6 +208,32 @@ export const StoreReducer = createReducer(
     ...state,
     deleteProduct: {
       ...state.deleteProduct,
+      loading: false,
+      error: action.error
+    }
+  })),
+
+  // Create product
+  on(StoresActions.createProduct, state => ({
+    ...state,
+    createProduct: {
+      ...state.createProduct,
+      loading: true,
+      error: null
+    }
+  })),
+  on(StoresActions.createProductSuccess, (state, action) => ({
+    ...state,
+    createProduct: {
+      ...state.createProduct,
+      loading: false,
+      error: null
+    }
+  })),
+  on(StoresActions.createProductFailed, (state, action) => ({
+    ...state,
+    createProduct: {
+      ...state.createProduct,
       loading: false,
       error: action.error
     }

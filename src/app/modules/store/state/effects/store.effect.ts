@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { StoresActions } from '../actions/store.action';
-import { StoreService } from '../services/store.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Store } from '@ngrx/store';
-import { UiActions } from '../../../../root-state/ui/actions/ui.action';
-import { StoreSelector } from '../selectors/store.selector';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
+import { UiActions } from '../../../../root-state/ui/actions/ui.action';
+import { StoresActions } from '../actions/store.action';
+import { StoreSelector } from '../selectors/store.selector';
+import { StoreService } from '../services/store.service';
 
 @Injectable()
 export class StoreEffect {
@@ -39,7 +39,6 @@ export class StoreEffect {
     this.actions$.pipe(
       ofType(StoresActions.getStoreFailed),
       tap((action) => {
-        console.log('failed effect: ', action);
         this.router.navigate(['error'], {
           queryParams: { errorCode: action.error.status, message: action.error.message },
         });
@@ -86,7 +85,10 @@ export class StoreEffect {
   deleteProductSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoresActions.deleteProductSuccess),
-      map((action) => StoresActions.getProducts({ storeId: action.storeId }))
+      mergeMap((action) => [
+        StoresActions.getProducts({ storeId: action.storeId }),
+        UiActions.toggleSnackbar({ message: 'Product deleted successfully', timestamp: Date.now() })
+      ])
     )
   );
 
@@ -105,7 +107,10 @@ export class StoreEffect {
   createProductSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoresActions.createProductSuccess),
-      map((action) => StoresActions.getProducts({ storeId: action.storeId }))
+      mergeMap((action) => [
+        StoresActions.getProducts({ storeId: action.storeId }),
+        UiActions.toggleSnackbar({ message: 'Product created successfully', timestamp: Date.now() })
+      ])
     )
   );
 

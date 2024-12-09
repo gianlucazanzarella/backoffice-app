@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-error',
@@ -8,9 +9,15 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor() { }
+  errorCode: number | null;
+  message: string | null;
 
-  ngOnInit() {
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.errorCode = params['errorCode'] ?? 404;
+      this.message = params['message'] ?? 'Page not found';
+    });
   }
-
 }

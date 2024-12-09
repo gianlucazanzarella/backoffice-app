@@ -38,8 +38,11 @@ export class StoreEffect {
   getStoreFailed$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoresActions.getStoreFailed),
-      tap(() => {
-        this.router.navigate(['error']);
+      tap((action) => {
+        console.log('failed effect: ', action);
+        this.router.navigate(['error'], {
+          queryParams: { errorCode: action.error.status, message: action.error.message },
+        });
       }),
     ), { dispatch: false }
   );

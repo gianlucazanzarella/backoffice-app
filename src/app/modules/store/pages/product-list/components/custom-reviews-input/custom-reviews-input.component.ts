@@ -141,17 +141,7 @@ export class CustomReviewsInputComponent implements ControlValueAccessor, MatFor
     controlElement.setAttribute('aria-describedby', ids.join(' '));
   }
 
-  onContainerClick() {
-    // if (this.comments.controls.subscriber.valid) {
-    //   this._focusMonitor.focusVia(this.subscriberInput(), 'program');
-    // } else if (this.comments.controls.exchange.valid) {
-    //   this._focusMonitor.focusVia(this.subscriberInput(), 'program');
-    // } else if (this.comments.controls.area.valid) {
-    //   this._focusMonitor.focusVia(this.exchangeInput(), 'program');
-    // } else {
-    //   this._focusMonitor.focusVia(this.areaInput(), 'program');
-    // }
-  }
+  onContainerClick() { }
 
   writeValue(comments: string[] | null): void {
     this._updateValue(comments);
@@ -170,7 +160,6 @@ export class CustomReviewsInputComponent implements ControlValueAccessor, MatFor
   }
 
   _handleInput(): void {
-    // this.autoFocusNext(control, nextElement);
     this.onChange(this.value);
   }
 
@@ -179,6 +168,6 @@ export class CustomReviewsInputComponent implements ControlValueAccessor, MatFor
   }
 
   trackByFn(index: number, item: any): string {
-    return item.key; // Usa la chiave unica dell'elemento, ad esempio "comment.key"
+    return item.key;
   }
 }

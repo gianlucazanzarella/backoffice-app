@@ -92,23 +92,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field class="mb-2">
-      <mat-label>
-        Reviews
-      </mat-label>
-
-      <textarea
-        matInput
-        formControlName="reviews"
-        placeholder="Add a review..."
-      ></textarea>
-
-      @if (productForm.get('reviews')?.hasError('required')) {
-      <mat-error>
-        Reviews is required
-      </mat-error>
-      }
-    </mat-form-field>
+    <app-custom-reviews-input formControlName="reviews"></app-custom-reviews-input>
   </form>
 </mat-dialog-content>
 

@@ -5,6 +5,7 @@ import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { CustomReviewsInputComponent } from "../custom-reviews-input/custom-reviews-input.component";
 
 @Component({
   selector: 'app-create-dialog',
@@ -16,7 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    MatSelectModule
+    MatSelectModule,
+    CustomReviewsInputComponent
   ],
   templateUrl: './create-dialog.component.html',
   styleUrl: './create-dialog.component.scss',
@@ -37,7 +39,7 @@ export class CreateDialogComponent implements OnInit {
       price: new FormControl<string>('', [Validators.required, Validators.pattern(/^\d+$/)]),
       employee: new FormControl<string>('', [Validators.required]),
       description: new FormControl<string>('', [Validators.required]),
-      reviews: new FormControl<string>('', [Validators.required])
+      reviews: new FormControl<string[]>([])
     });
   }
 
@@ -46,11 +48,6 @@ export class CreateDialogComponent implements OnInit {
   }
 
   create(): void {
-    this.dialogRef.close({
-      ...this.productForm.value,
-      reviews: [
-        this.productForm.get('reviews')?.value
-      ]
-    });
+    this.dialogRef.close(this.productForm.value);
   }
 }

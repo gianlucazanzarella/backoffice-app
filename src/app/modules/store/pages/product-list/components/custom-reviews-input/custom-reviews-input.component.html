@@ -1,0 +1,41 @@
+<div
+  role="group"
+  class="example-tel-input-container"
+  [formGroup]="comments"
+>
+  <div class="mb-4 mt-2">
+    <button
+      mat-stroked-button
+      (click)="addReview()"
+    >
+      <mat-icon>add</mat-icon>
+      Add comment
+    </button>
+  </div>
+
+  <ng-container *ngFor="let comment of comments.value | keyvalue; trackBy: trackByFn">
+    <div class="flex flex-col">
+      <div class="flex flex-row items-center">
+        <div class="mb-2 mr-2">
+          <button
+            mat-icon-button
+            (click)="deleteReview(comment.key)"
+          >
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+
+        <mat-form-field class="w-full">
+          <textarea
+            placeholder="Add your comment here"
+            class="mb-2"
+            matInput
+            class="example-tel-input-element"
+            [formControlName]="$any(comment.key)"
+            #area
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </ng-container>
+</div>
